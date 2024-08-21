@@ -38,7 +38,7 @@ def main(dataset: str = 'livia_mini',
     device = torch.device(f'cuda:{gpu_id}' if torch.cuda.is_available() else 'cpu')
 
     # Load data
-    study_file = Path(f'./output/gluformer_{dataset}.txt')
+    study_file = Path(f'./output/text/gluformer_{dataset}.txt')
     if not study_file.exists():
         with study_file.open("w") as f:
             f.write(f"Training and testing started at {datetime.datetime.now()}\n")
