@@ -71,7 +71,8 @@ glufo = Gluformer(
     num_static_features=num_static_features
 )
 glufo.to('cuda')
-glufo.load_state_dict(torch.load(f'./output/tensorboard_gluformer_{dataset}/model.pt', map_location=torch.device('cuda')))
+#glufo.load_state_dict(torch.load(f'./output/tensorboard_gluformer_{dataset}/model.pt', map_location=torch.device('cuda')))
+glufo.load_state_dict(torch.load(f'./output/models/livia_mini/gluformer_1samples_10000epochs_10heads_32batch_geluactivation_livia_mini_weights.pth', map_location=torch.device('cuda')))
 
 # Get predictions
 print('Gluformer')
@@ -103,7 +104,7 @@ sns.set_theme(style="whitegrid")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Select a specific sample to plot
-ind = 10  # Example index
+ind = 300  # Example index
 
 samples = np.random.normal(
     loc=forecasts[ind, :],  # Mean (center) of the distribution
