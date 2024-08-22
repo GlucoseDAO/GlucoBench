@@ -34,7 +34,7 @@ formatter, series, scalers = load_data(seed=0,
 formatter.params['gluformer'] = {
     'in_len': 96,  # example input length, adjust as necessary
     'd_model': 512,  # model dimension
-    'n_heads': 12,  # number of attention heads##############################################################################
+    'n_heads': 10,  # number of attention heads##############################################################################
     'd_fcn': 1024,  # fully connected layer dimension
     'num_enc_layers': 2,  # number of encoder layers
     'num_dec_layers': 2,  # number of decoder layers
@@ -72,12 +72,12 @@ glufo = Gluformer(
 )
 glufo.to('cuda')
 #glufo.load_state_dict(torch.load(f'./output/tensorboard_gluformer_{dataset}/model.pt', map_location=torch.device('cuda')))
-#glufo.load_state_dict(torch.load(f'./output/models/livia_mini/gluformer_1samples_10000epochs_10heads_32batch_geluactivation_livia_mini_weights.pth', map_location=torch.device('cuda')))
+glufo.load_state_dict(torch.load(f'./output/models/livia_mini/gluformer_1samples_10000epochs_10heads_32batch_geluactivation_livia_mini_weights.pth', map_location=torch.device('cuda')))
 #glufo.load_state_dict(torch.load(f'./output/models/anton/gluformer_1samples_1000epochs_10heads_32batch_geluactivation_anton_weights.pth', map_location=torch.device('cuda')))
-m=torch.load("./output/models/livia_large/gluformer_1samples_100epochs_12heads_320batch_geluactivation_livia_large.pth")
-msd=m.state_dict()
-torch.save(msd, './output/models/livia_large/gluformer_1samples_100epochs_12heads_320batch_geluactivation_livia_large_weights.pth')
-glufo.load_state_dict(torch.load(f'./output/models/livia_large/gluformer_1samples_100epochs_12heads_320batch_geluactivation_livia_large_weights.pth', map_location=torch.device('cuda')))
+#m=torch.load("./output/models/livia_large/gluformer_1samples_100epochs_12heads_320batch_geluactivation_livia_large.pth")
+#msd=m.state_dict()
+#torch.save(msd, './output/models/livia_large/gluformer_1samples_100epochs_12heads_320batch_geluactivation_livia_large_weights.pth')
+#glufo.load_state_dict(torch.load(f'./output/models/livia_large/gluformer_1samples_100epochs_12heads_320batch_geluactivation_livia_large_weights.pth', map_location=torch.device('cuda')))
 
 
 # Get predictions
@@ -110,7 +110,7 @@ sns.set_theme(style="whitegrid")
 fig, ax = plt.subplots(figsize=(10, 6))
 
 # Select a specific sample to plot
-ind = 300  # Example index
+ind = 30  # Example index
 
 samples = np.random.normal(
     loc=forecasts[ind, :],  # Mean (center) of the distribution
@@ -154,4 +154,5 @@ for item in ax.get_xticklabels() + ax.get_yticklabels():
 # Save figure
 plt.tight_layout()
 plt.savefig(f'output/plots/gluformer_prediction_gradient_{dataset}_{ind}.pdf', dpi=300, bbox_inches='tight')
+plt.savefig(f'output/plots/gluformer_prediction_gradient_{dataset}_{ind}.png', dpi=300, bbox_inches='tight')
 plt.show()
