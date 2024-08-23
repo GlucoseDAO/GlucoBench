@@ -9,6 +9,9 @@ output/tensorboard_*/*
 
 # ignore folder raw_data
 raw_data/
+!raw_data/anton.csv
+!raw_data/livia_mini.csv
+!raw_data/livia_large.csv
 
 # ignore pre-complied code
 *.cpython-37.pyc
