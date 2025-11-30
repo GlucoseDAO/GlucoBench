@@ -1,6 +1,6 @@
 [project]
 name = "glucosedao-glucobench"
-version = "0.2.0"
+version = "0.3.0"
 description = "GlucoseDao's fork of GlucoBench by IrinaStatsLab"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -32,15 +32,14 @@ dependencies = [
     "pytorch-lightning>=2.6.0",
 ]
 
-[project.scripts]
-glucosedao = "glucosedao:main"
+
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["glucosedao"]
+packages = ["lib", "utils", "data_formatter"]
 
 [tool.hatch.build.targets.sdist]
 exclude = [
