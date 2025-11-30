@@ -1,0 +1,56 @@
+[project]
+name = "glucosedao-glucobench"
+version = "0.2.0"
+description = "GlucoseDao's fork of GlucoBench by IrinaStatsLab"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "optuna",
+    "tensorboard",
+    "pandas",
+    "polars",
+    "darts==0.29.0",
+    "peft",
+    "transformers",
+    "datasets>=2.19.1",
+    "matplotlib>=3.10.7",
+    "numpy<2",
+    "xgboost~=3.1",
+    "statsmodels>=0.14.5",
+    "statsforecast~=2.0",
+    "typer>=0.20.0",
+    "pillow",
+    "pyyaml>=6.0",
+    "requests",
+    "scikit-learn>=1.7",
+    "seaborn>=0.13.2",
+    "tqdm>=4.66.4",
+    "torchdiffeq>=0.2.5",
+    "scipy>1.15",
+    "sympy>=1.14.0",
+    "pytorch-lightning>=2.6.0",
+]
+
+[project.scripts]
+glucosedao = "glucosedao:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["glucosedao"]
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+    "data/",
+    "raw_data/",
+    "paper_results/",
+    "output/",
+    "exploratory_analysis/",
+    "data/**/*.csv",
+    ".pytest_cache/",
+    ".venv/",
+    "*.egg-info/",
+]
