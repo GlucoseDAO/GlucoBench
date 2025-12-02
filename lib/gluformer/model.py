@@ -18,12 +18,16 @@ from .variance import *
 import optuna
 import darts
 from torch.utils.tensorboard import SummaryWriter
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-from lib.gluformer.utils.training import ExpLikeliLoss, \
-                                         EarlyStop, \
-                                         modify_collate, \
-                                         adjust_learning_rate
-from utils.darts_dataset import SamplingDatasetDual
+try:
+    from .utils.training import ExpLikeliLoss, EarlyStop, modify_collate, adjust_learning_rate
+    from ...utils.darts_dataset import SamplingDatasetDual
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+    from lib.gluformer.utils.training import ExpLikeliLoss, \
+                                             EarlyStop, \
+                                             modify_collate, \
+                                             adjust_learning_rate
+    from utils.darts_dataset import SamplingDatasetDual
 ############################################
 
 class Gluformer(nn.Module):

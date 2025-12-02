@@ -28,8 +28,7 @@ pd.options.mode.chained_assignment = None
 from typing import List, Tuple
 from sklearn import preprocessing
 
-import data_formatter
-from data_formatter import types
+from . import types
 
 DataTypes = types.DataTypes
 InputTypes = types.InputTypes

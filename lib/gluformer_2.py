@@ -12,12 +12,19 @@ import typer
 import numpy as np
 
 # Import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
-from lib.gluformer.model import Gluformer
-from lib.gluformer.utils.evaluation import test
-from utils.darts_processing import load_data, reshuffle_data
-from utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
+try:
+    from ..data_formatter.base import *
+    from .gluformer.model import Gluformer
+    from .gluformer.utils.evaluation import test
+    from ..utils.darts_processing import load_data, reshuffle_data
+    from ..utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
+    from lib.gluformer.model import Gluformer
+    from lib.gluformer.utils.evaluation import test
+    from utils.darts_processing import load_data, reshuffle_data
+    from utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
 
 def main(dataset: str = 'livia_mini',
          gpu_id: int = 0,

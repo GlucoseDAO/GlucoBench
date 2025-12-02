@@ -8,8 +8,11 @@ import argparse
 from statsforecast.models import AutoARIMA
 
 # import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
+try:
+    from ..data_formatter.base import *
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
 
 def test_model(test_data, scaler, in_len, out_len, stride, target_col, group_col):
     errors = []

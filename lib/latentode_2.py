@@ -8,13 +8,17 @@ import torch
 from torch.utils.tensorboard import SummaryWriter
 
 # Load model
-from latent_ode.trainer_glunet import LatentODEWrapper
-from latent_ode.eval_glunet import test
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-# Utils for darts
-from utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
-from utils.darts_processing import load_data
+try:
+    from .latent_ode.trainer_glunet import LatentODEWrapper
+    from .latent_ode.eval_glunet import test
+    from ..utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
+    from ..utils.darts_processing import load_data
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from latent_ode.trainer_glunet import LatentODEWrapper
+    from latent_ode.eval_glunet import test
+    from utils.darts_dataset import SamplingDatasetDual, SamplingDatasetInferenceDual
+    from utils.darts_processing import load_data
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='weinstock')

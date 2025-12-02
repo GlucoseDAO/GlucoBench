@@ -27,8 +27,15 @@ from darts.utils.data.inference_dataset import PastCovariatesInferenceDataset, \
 from darts.utils.data.utils import CovariateType
 
 # import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
+try:
+    # Try relative import (for glucobench package usage)
+    from ..data_formatter.base import *
+except (ImportError, ValueError):
+    # Fallback for legacy/flat repo usage
+    import sys
+    import os
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
 
 def get_valid_sampling_locations(target_series: Union[TimeSeries, Sequence[TimeSeries]],
                                  output_chunk_length: int = 12,

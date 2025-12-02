@@ -14,9 +14,13 @@ from darts import metrics
 from darts import TimeSeries
 
 # import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
-from utils.darts_processing import *
+try:
+    from ..data_formatter.base import *
+    from .darts_processing import *
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
+    from utils.darts_processing import *
 
 def _get_values(
     series: TimeSeries, stochastic_quantile: Optional[float] = 0.5

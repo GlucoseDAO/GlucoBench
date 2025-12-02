@@ -13,12 +13,19 @@ from darts import TimeSeries
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 
 # import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
-from utils.darts_processing import load_data, reshuffle_data
-from utils.darts_evaluation import rescale_and_test
-from utils.darts_training import *
-from utils.darts_dataset import SamplingDatasetMixed, SamplingDatasetInferenceMixed
+try:
+    from ..data_formatter.base import *
+    from ..utils.darts_processing import load_data, reshuffle_data
+    from ..utils.darts_evaluation import rescale_and_test
+    from ..utils.darts_training import *
+    from ..utils.darts_dataset import SamplingDatasetMixed, SamplingDatasetInferenceMixed
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
+    from utils.darts_processing import load_data, reshuffle_data
+    from utils.darts_evaluation import rescale_and_test
+    from utils.darts_training import *
+    from utils.darts_dataset import SamplingDatasetMixed, SamplingDatasetInferenceMixed
 
 # define objective function
 def objective(trial):

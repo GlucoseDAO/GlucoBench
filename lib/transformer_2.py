@@ -12,12 +12,19 @@ from torch.optim.lr_scheduler import StepLR
 from pytorch_lightning.callbacks.early_stopping import EarlyStopping
 
 # Import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
-from utils.darts_processing import load_data, reshuffle_data
-from utils.darts_evaluation import rescale_and_test
-from utils.darts_training import *
-from utils.darts_dataset import SamplingDatasetPast, SamplingDatasetInferencePast
+try:
+    from ..data_formatter.base import *
+    from ..utils.darts_processing import load_data, reshuffle_data
+    from ..utils.darts_evaluation import rescale_and_test
+    from ..utils.darts_training import *
+    from ..utils.darts_dataset import SamplingDatasetPast, SamplingDatasetInferencePast
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
+    from utils.darts_processing import load_data, reshuffle_data
+    from utils.darts_evaluation import rescale_and_test
+    from utils.darts_training import *
+    from utils.darts_dataset import SamplingDatasetPast, SamplingDatasetInferencePast
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='weinstock')

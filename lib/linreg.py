@@ -12,11 +12,17 @@ from darts import metrics
 from darts import TimeSeries
 
 # import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
-from utils.darts_processing import load_data, reshuffle_data
-from utils.darts_evaluation import rescale_and_backtest
-from utils.darts_training import print_callback
+try:
+    from ..data_formatter.base import *
+    from ..utils.darts_processing import load_data, reshuffle_data
+    from ..utils.darts_evaluation import rescale_and_backtest
+    from ..utils.darts_training import print_callback
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
+    from utils.darts_processing import load_data, reshuffle_data
+    from utils.darts_evaluation import rescale_and_backtest
+    from utils.darts_training import print_callback
 
 # lag setter for covariates
 def set_lags(in_len, args):

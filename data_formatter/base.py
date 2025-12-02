@@ -4,8 +4,8 @@ import warnings
 import numpy as np
 import pandas as pd
 import sklearn.preprocessing
-import data_formatter.types as types
-import data_formatter.utils as utils
+from . import types
+from . import utils
 
 DataTypes = types.DataTypes
 InputTypes = types.InputTypes

@@ -17,8 +17,11 @@ from pytorch_lightning.callbacks import Callback
 from sympy import pprint
 
 # import data formatter
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from data_formatter.base import *
+try:
+    from ..data_formatter.base import *
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    from data_formatter.base import *
 
 pd.set_option('display.width', None)   # Set display width to None to avoid truncation
 pd.set_option('display.max_columns', None)  # Display all columns

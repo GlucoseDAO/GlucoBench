@@ -32,13 +32,20 @@ from .utils import compute_loss_all_batches
 import optuna
 import darts
 from torch.utils.tensorboard import SummaryWriter
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-# utils for darts
-from data_formatter.base import *
-from utils.darts_dataset import *
-from utils.darts_processing import *
-from utils.darts_training import *
-from utils.darts_evaluation import *
+try:
+    from ...data_formatter.base import *
+    from ...utils.darts_dataset import *
+    from ...utils.darts_processing import *
+    from ...utils.darts_training import *
+    from ...utils.darts_evaluation import *
+except (ImportError, ValueError):
+    sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+    # utils for darts
+    from data_formatter.base import *
+    from utils.darts_dataset import *
+    from utils.darts_processing import *
+    from utils.darts_training import *
+    from utils.darts_evaluation import *
 ############################################
 
 class ArgsParser():
